@@ -13462,13 +13462,13 @@ It is not possible to determine the polynomial unless atleast $t$ people come to
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Secret-Sharing-heuristic-applied-to-bank-lockers">Secret Sharing heuristic applied to bank lockers<a class="anchor-link" href="#Secret-Sharing-heuristic-applied-to-bank-lockers">&#182;</a></h3><blockquote><p>"In response to a recent RTI, the RBI and 19 PSU banks explained that “the relationship they have with customers with regard to lockers is that of lessee tenant) and lessor (landlord)”, and no compensation will be given for theft or burglary of valuables in safe deposit boxes of public sector banks as the locker hiring agreement absolves them of all liability."  -TOI</p>
+<h3 id="Secret-Sharing-heuristic-applied-to-bank-lockers">Secret Sharing heuristic applied to bank lockers<a class="anchor-link" href="#Secret-Sharing-heuristic-applied-to-bank-lockers">&#182;</a></h3><blockquote><p>"In response to a recent RTI, the RBI and 19 PSU banks explained that “the relationship they have with customers with regard to lockers is that of lessee (tenant) and lessor (landlord)”, and no compensation will be given for theft or burglary of valuables in safe deposit boxes of public sector banks as the locker hiring agreement absolves them of all liability"  -TOI</p>
 </blockquote>
-<p>So due to this response and also otherwise we want to ask the question that can anybody else open the locker of my bank without me providing my key and what is the guarantee that this can't happen.</p>
+<p>The response to this RTI raises a question about the security of bank lockers. We want to  try to understand how secure our valuables are inside bank lockers.</p>
+<p>MPC and related ideas helps us to understand the same and we will briefly explain the same here. Our main question is: can my bank locker be opened without my key?</p>
 <center>
 <figure>
-    <img src="banklocker.jpg"  height="500" width="500"/>
-
+    <img src="banklocker.jpg"  height="250" width="350"/>
 </figure>
 </center>
 </div>
@@ -13937,7 +13937,7 @@ can compute this since it knows $k$.</li>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Counting-votes-in-EVM-machines">Counting votes in EVM machines<a class="anchor-link" href="#Counting-votes-in-EVM-machines">&#182;</a></h2><ul>
-<li>In India when we count votes through EVM machines all numbers appear of how many people voted to a particular candidate from a given box thereby although not individually but we do get some partial information of how many people from a particular area voted for a certain candidate so in many cases with a reasonable confidence candidate will know who voted for whom from certain areas something which is not desirable</li>
+<li>In India when we count votes through EVM machines all numbers appear of how many people voted to a particular candidate from a given box thereby although not individually but we do get some partial information of how many people from a particular area voted for a certain candidate so in many cases with a reasonable confidence candidate will know who voted for whom from certain areas something which is not desirable.</li>
 <li>If we try to use some MPC protocol such that we do not know the vote count of a particular party from a given box but we get the total vote count of candidates in total something which will make it much more difficult for a particular candidate to determine who voted for whom which is desirable thereby MPC may be used to solve this problem.</li>
 </ul>
 
@@ -13969,8 +13969,29 @@ can compute this since it knows $k$.</li>
 <li><a href="https://timesofindia.indiatimes.com/blogs/toi-edit-page/security-of-my-bank-locker-here-are-simple-geometric-solutions-to-protect-valuables-or-confidential-information/(Times">https://timesofindia.indiatimes.com/blogs/toi-edit-page/security-of-my-bank-locker-here-are-simple-geometric-solutions-to-protect-valuables-or-confidential-information/(Times</a> of India article explaining Security of bank lockers)</li>
 <li><a href="https://main.sci.gov.in/supremecourt/2009/22857/22857_2009_39_1501_26314_Judgement_19-Feb-2021.pdf">https://main.sci.gov.in/supremecourt/2009/22857/22857_2009_39_1501_26314_Judgement_19-Feb-2021.pdf</a> (Honorable Supreme court of India's judgement which contains references to several issues related to security of things in bank lockers)</li>
 <li><a href="https://youtu.be/-1H1Sp-_5YU">https://youtu.be/-1H1Sp-_5YU</a> (EzPC)</li>
-<li><a href="https://media.istockphoto.com/photos/close-up-safety-box-password-in-digital-number-and-key-to-protected-picture-id1137672611?s=612x612">https://media.istockphoto.com/photos/close-up-safety-box-password-in-digital-number-and-key-to-protected-picture-id1137672611?s=612x612</a> (Image credits)</li>
 </ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Image-credits">Image credits<a class="anchor-link" href="#Image-credits">&#182;</a></h1><ul>
+<li>PSI: <a href="https://cyber.biu.ac.il/wp-content/uploads/2017/01/15.pdf">https://cyber.biu.ac.il/wp-content/uploads/2017/01/15.pdf</a></li>
+<li>SSS: <a href="https://medium.com/codechain/secret-sharing-468a85c14e53">https://medium.com/codechain/secret-sharing-468a85c14e53</a></li>
+<li>Bank locker: <a href="https://media.istockphoto.com/photos/close-up-safety-box-password-in-digital-number-and-key-to-protected-picture-id1137672611?s=612x612">https://media.istockphoto.com/photos/close-up-safety-box-password-in-digital-number-and-key-to-protected-picture-id1137672611?s=612x612</a>
+<a href="https://www.geeksforgeeks.org/implementing-shamirs-secret-sharing-scheme-in-python/">https://www.geeksforgeeks.org/implementing-shamirs-secret-sharing-scheme-in-python/</a></li>
+<li>MPC: <a href="https://www.mdpi.com/2076-3417/10/12/4080">https://www.mdpi.com/2076-3417/10/12/4080</a></li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-slides-are-available-at-https://bit.ly/MTH329_MPC_Presentation.">The slides are available at <a href="https://bit.ly/MTH329_MPC_Presentation">https://bit.ly/MTH329_MPC_Presentation</a>.<a class="anchor-link" href="#The-slides-are-available-at-https://bit.ly/MTH329_MPC_Presentation.">&#182;</a></h3><p><a href="https://mybinder.org/v2/gh/0Art0/SecureMultipartyComputation/08dd5dd01f7a483ba2862f52426e42793a090328"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></p>
 <hr>
 
 </div>
