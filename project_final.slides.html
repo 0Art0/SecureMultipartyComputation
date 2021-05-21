@@ -13391,7 +13391,6 @@ $$f(x_a,x_b,x_c)=\dfrac{x_a+x_b+x_c}{3}$$, where $x_i$ is known only to person $
 <h1 id="Security-Notions-in-MPC">Security Notions in MPC<a class="anchor-link" href="#Security-Notions-in-MPC">&#182;</a></h1><p>First of all, we need to define what security is. In order to formally claim and prove that this protocol is secure, a precise definition of security for multiparty computation is required.</p>
 <p>The standard definition today formalises security in the following general way. As a mental experiment, consider an “ideal world” in which an external trusted (and incorruptible) party is willing to help the parties carry out their computation. In such a world, the parties can simply send their inputs to the trusted party, who then computes the desired function and passes each party its prescribed output. Since the only action carried
 out by a party is that of sending its input to the trusted party, the only freedom given to an adversary is in choosing the corrupted (the parties under the control of the adversary are called corrupted, and follow the adversary’s instructions) parties’ inputs.</p>
-<p>Thus, a real protocol that is run by the parties (in a world where no trusted party exists) is said to be secure, if no adversary can do more harm in a real execution that in an execution that takes place in the ideal world. This formulation of security is called the <strong>ideal/real simulation paradigm</strong>.</p>
 
 </div>
 </div>
@@ -13399,6 +13398,7 @@ out by a party is that of sending its input to the trusted party, the only freed
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Thus, a real protocol that is run by the parties (in a world where no trusted party exists) is said to be secure, if no adversary can do more harm in a real execution that in an execution that takes place in the ideal world. This formulation of security is called the <strong>ideal/real simulation paradigm</strong>.</p>
 <p>In order to motivate the usefulness of this definition, we describe why properties like <strong>privacy</strong> (no party should learn anything more than its prescribed output) and <strong>correctness</strong> (each party is guaranteed that the output that it receives is correct) are implied. Privacy follows from the fact that the adversary’s output is the same in the real and ideal executions. Since the adversary learns nothing beyond the corrupted party’s outputs in an ideal execution, the same must be true for a real execution. Correctness follows from the fact that the honest parties’ outputs are the same in the real and ideal executions, and from the fact that in an ideal execution, the honest parties all receive correct outputs as computed by the trusted party.</p>
 
 </div>
@@ -13423,9 +13423,8 @@ Other than from a purely conceptual point of view, secret sharing is also intrig
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Shamir-Secret-Sharing">Shamir Secret Sharing<a class="anchor-link" href="#Shamir-Secret-Sharing">&#182;</a></h2><p>Shamir's Secret Sharing (SSS) is used to secure a secret in a distributed way, most often to secure other encryption keys. The secret is split into multiple parts, called <strong>shares</strong>. These shares are used to reconstruct the original secret.</p>
-<p>The minimum number of shares needed to unlock the secret is called the <strong>threshold</strong>.
-<br><br></p>
+<h2 id="Shamir-Secret-Sharing">Shamir Secret Sharing<a class="anchor-link" href="#Shamir-Secret-Sharing">&#182;</a></h2><p>Formulated by Adi Shamir, this was one of the first secret sharing schemes. This is a <strong>geometric version of secret sharing</strong>, which is based on polynomial interpolation over finite fields.</p>
+<p><br><br></p>
 <center>
 <figure>
     <img src="sss.png"  height="350" width="350"/>
@@ -13435,65 +13434,65 @@ Other than from a purely conceptual point of view, secret sharing is also intrig
 </div>
 </div>
 </div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="General-Protocol">General Protocol<a class="anchor-link" href="#General-Protocol">&#182;</a></h3><p>Formulated by Adi Shamir, this was one of the first secret sharing schemes. We explain a <strong>geometric version of secret sharing</strong>, which is based on polynomial interpolation over finite fields.</p>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span></span><span class="kt">HTML</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;center&gt; &lt;iframe src=&quot;https://www.desmos.com/calculator/7p11jm818z&quot; width=&quot;1500&quot; height=&quot;700&quot;&gt;&lt;/iframe&gt; &lt;/center&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<center> <iframe src="https://www.desmos.com/calculator/7p11jm818z" width="1500" height="700"></iframe> </center>
+</div>
+
+</div>
 
 </div>
 </div>
-</div><div class="fragment">
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="General-Protocol">General Protocol<a class="anchor-link" href="#General-Protocol">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Assume that a secret ($s$) is to be shared among $n$ people. The protocol is as follows:</p>
 <ul>
 <li>A threshold $t(≤ n)$ is chosen.</li>
-<li>A polynomial passing through $(0, s)$ of degree $t-1$ is chosen.</li>
+<li>A polynomial passing through $(0, s)$ of degree $t$ is chosen.</li>
 <li>$n$ distinct points lying on the polynomial (called shares) are selected.</li>
-<li>A point on the polynomial $(x_i, y_i), 1≤i≤t $ is shared with each of the $n$ people.</li>
-<li>If $t$ people combine, the polynomial and hence the secret can be determined.
-It is not possible to determine the polynomial unless atleast $t$ people come together. This is due to the fact that there are infinite polynomials passing through $(t-k)$ points for any $k \in [1, t-1]$.</li>
+<li>A point on the polynomial $(x_i, y_i), 1≤i≤n $ is shared with each of the $n$ people.</li>
+<li>If $t+1$ people combine, the polynomial and hence the secret can be determined.
+It is not possible to determine the polynomial unless atleast $t+1$ people come together. This is due to the fact that there are infinite polynomials of degree $t$ passing through $t$ points.</li>
 </ul>
 
-</div>
-</div>
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Secret-Sharing-heuristic-applied-to-bank-lockers">Secret Sharing heuristic applied to bank lockers<a class="anchor-link" href="#Secret-Sharing-heuristic-applied-to-bank-lockers">&#182;</a></h3><blockquote><p>"In response to a recent RTI, the RBI and 19 PSU banks explained that “the relationship they have with customers with regard to lockers is that of lessee (tenant) and lessor (landlord)”, and no compensation will be given for theft or burglary of valuables in safe deposit boxes of public sector banks as the locker hiring agreement absolves them of all liability"  -TOI</p>
-</blockquote>
-<p>The response to this RTI raises a question about the security of bank lockers. We want to  try to understand how secure our valuables are inside bank lockers.</p>
-<p>MPC and related ideas helps us to understand the same and we will briefly explain the same here. Our main question is: can my bank locker be opened without my key?</p>
-<center>
-<figure>
-    <img src="banklocker.jpg"  height="250" width="350"/>
-</figure>
-</center>
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Assumptions:-">Assumptions:-<a class="anchor-link" href="#Assumptions:-">&#182;</a></h4><ol>
-<li>We are talking of modern day bank lockers which require both keys the key of the owner of contents inside the locker in addition to that of the branch manager and also that the lockers are digital.</li>
-<li>We are considering that the lockers are designed in such a way that it is not possible to acccess the things inside lockers by physically breaking the lockers.</li>
-</ol>
-<p>We will use idea similar to Shamir secret sharing in order to understand this problem.</p>
-<p><br></p>
-<center>
-<video controls width="900" height="500" src="BankLocker.mp4">
-        </video>
-</center>
 </div>
 </div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="An-application-of-Shamir-Secret-Sharing-to-computing-sums">An application of Shamir Secret Sharing to computing sums<a class="anchor-link" href="#An-application-of-Shamir-Secret-Sharing-to-computing-sums">&#182;</a></h1>
+<h1 id="An-application-of-Shamir-Secret-Sharing-to-computing-polynomials">An application of Shamir Secret Sharing to computing polynomials<a class="anchor-link" href="#An-application-of-Shamir-Secret-Sharing-to-computing-polynomials">&#182;</a></h1>
 </div>
 </div>
 </div></section><section>
@@ -13620,7 +13619,7 @@ Consider a set-up with $5$ people performing a $(2, 5)$ secret sharing with secr
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-julia"><pre><span></span>
+<div class=" highlight hl-julia"><pre><span></span><span class="n">Anirudh</span><span class="o">.</span><span class="n">secretpoly</span>
 </pre></div>
 
     </div>
@@ -13728,7 +13727,38 @@ $$
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Secret-Sharing-heuristic-applied-to-bank-lockers">Secret Sharing heuristic applied to bank lockers<a class="anchor-link" href="#Secret-Sharing-heuristic-applied-to-bank-lockers">&#182;</a></h3><blockquote><p>"In response to a recent RTI, the RBI and 19 PSU banks explained that “the relationship they have with customers with regard to lockers is that of lessee (tenant) and lessor (landlord)”, and no compensation will be given for theft or burglary of valuables in safe deposit boxes of public sector banks as the locker hiring agreement absolves them of all liability"  -TOI</p>
+</blockquote>
+<p>The response to this RTI raises a question about the security of bank lockers. We want to  try to understand how secure our valuables are inside bank lockers.</p>
+<p>MPC and related ideas helps us to understand the same and we will briefly explain the same here. Our main question is: can my bank locker be opened without my key?</p>
+<center>
+<figure>
+    <img src="banklocker.jpg"  height="250" width="350"/>
+</figure>
+</center>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Assumptions:-">Assumptions:-<a class="anchor-link" href="#Assumptions:-">&#182;</a></h4><ol>
+<li>We are talking of modern day bank lockers which require both keys the key of the owner of contents inside the locker in addition to that of the branch manager and also that the lockers are digital.</li>
+<li>We are considering that the lockers are designed in such a way that it is not possible to access the things inside lockers by physically breaking the lockers.</li>
+</ol>
+<p>We will use idea similar to Shamir secret sharing in order to understand this problem.</p>
+<p><br></p>
+<center>
+<video controls width="900" height="500" src="BankLocker.mp4">
+        </video>
+</center>
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13739,27 +13769,12 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>Matching records is one of the most basic data analysis operations. There are many cases where data needs to be aligned across some common value — whether that’s joining between two different tables in a database or across two data sets stored in a file, or matching data sets between two separate entities.</p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-is-Private-Set-Intersection-(PSI)?">What is Private Set Intersection (PSI)?<a class="anchor-link" href="#What-is-Private-Set-Intersection-(PSI)?">&#182;</a></h2><p>PSI is a multi-party computation method using which <strong>2 parties can share the intersection of the data that they have, without actually sharing their private raw data</strong>. An important and widely used variant is that of client-server systems. In this case, it is only the client who learns the intersection of the data sets. This is the more studied version, because using this variant in both directions is equivalent to the first variant.</p>
-<p>PSI has its uses in areas like Plagiarism, Human genomic testing, Detection of tax evaders etc.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Protecting the confidentiality of a data set is a natural need and even a requisite in many scenarios. For example, when the data is user’s address book or the client genome of a genetic diagnosis service, such input data must be protected by cryptography.</p>
+<h2 id="What-is-Private-Set-Intersection-(PSI)?">What is Private Set Intersection (PSI)?<a class="anchor-link" href="#What-is-Private-Set-Intersection-(PSI)?">&#182;</a></h2><p>Matching records is one of the most basic data analysis operations. There are many cases where data needs to be aligned across some common value — whether that’s joining between two different tables in a database or across two data sets stored in a file, or matching data sets between two separate entities.</p>
+<p>PSI is a multi-party computation method using which <strong>2 parties can share the intersection of the data that they have, without actually sharing their private raw data</strong>.</p>
+<p>An important and widely used variant is that of client-server systems. In this case, it is only the client who learns the intersection of the data sets. This is the more studied version, because using this variant in both directions is equivalent to the first variant.</p>
 <center>
 <figure>
-    <img src="psi.jpg"  height="400" width="400"/>
+    <img src="psi.jpg"  height="350" width="350"/>
     <figcaption>Client-Server PSI</figcaption>
 </figure>
 </center>
@@ -13792,7 +13807,7 @@ secret).</p>
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13805,7 +13820,7 @@ $y_1, \cdots , y_n$, respectively. Then the protocol proceeds as follows:</p>
 
 </div>
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13834,7 +13849,7 @@ can compute this since it knows $k$.</li>
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13842,19 +13857,19 @@ can compute this since it knows $k$.</li>
 
 </div>
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Protocol">Protocol<a class="anchor-link" href="#Protocol">&#182;</a></h4><ul>
 <li>Agree on a group $\mathbb{Z}_p$ with a generator $g$ ($p$ is prime). H is a pseudorandom function, which is also agreed upon. First party chooses secret $\alpha \in \mathbb{Z}_p$, second party chooses secret $\beta \in \mathbb{Z}_p$.</li>
 <li>For random $a,b,c$, one cannot distinguish $(g^a, g^b, g^{ab})$ from $g^a, g^b, g^c$ (DDH assumption)</li>
-<li>First party's dataset: $x_1, x_2,  \cdots x_n$, Second party's dataset: $y_1, y_2, \cdots y_n$. </li>
+<li>First party's dataset: $x_1, x_2,  \cdots x_n$, Second party's dataset: $y_1, y_2, \cdots y_n$. The common hash function: $H$.</li>
 <li>First party computes $H(x_1)^\alpha, \cdots H(x_n)^\alpha$, second party computes $H(y_1)^\beta, \cdots H(y_n)^\beta$. </li>
-<li>Both parties exchange their outputs. First party computes $(H(x_1)^\alpha)^\beta \cdots (H(x_n)^\alpha)^\beta$. Similarly, second party computes $(H(x_1)^\beta)^\alpha \cdots (H(x_n)^\beta)^\alpha$. </li>
-<li>Since $(H(x)^\alpha)^\beta=(H(x)^\beta)^\alpha$, both parties can compare the 2 lists, and find the intersection. </li>
+<li>Both parties exchange their outputs. Second party computes $(H(x_1)^\alpha)^\beta \cdots (H(x_n)^\alpha)^\beta$. Similarly, first party computes $(H(y_1)^\beta)^\alpha \cdots (H(y_n)^\beta)^\alpha$. </li>
+<li>Since $(H(x)^\alpha)^\beta=(H(y)^\beta)^\alpha$ for the common elements, both parties can compare the 2 lists, and find the intersection. </li>
 </ul>
-<center><img src="psidiffie.png"  height="500" width="500"/></center>
+<center><img src="psidiffie.png"  height="850" width="850"/></center>
 </div>
 </div>
 </div></section></section><section><section>
@@ -13918,9 +13933,10 @@ can compute this since it knows $k$.</li>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="EzPC">EzPC<a class="anchor-link" href="#EzPC">&#182;</a></h2><ul>
+<li>Being developed by Microsoft Research India</li>
 <li>Yao's millionaires problem</li>
 <li>Can this idea be extended to any number of inputs and any general function?</li>
-<li>Usefulness of modern-day programming languages like C++, Python, etc </li>
+<li>Usefulness of modern-day programming languages like C++, Python, Julia etc </li>
 <li>Main components of modern days programming languages in practice<ul>
 <li>data</li>
 <li>computation</li>
@@ -13991,8 +14007,7 @@ can compute this since it knows $k$.</li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-slides-are-available-at-https://bit.ly/MTH329_MPC_Presentation.">The slides are available at <a href="https://bit.ly/MTH329_MPC_Presentation">https://bit.ly/MTH329_MPC_Presentation</a>.<a class="anchor-link" href="#The-slides-are-available-at-https://bit.ly/MTH329_MPC_Presentation.">&#182;</a></h3><p><a href="https://mybinder.org/v2/gh/0Art0/SecureMultipartyComputation/08dd5dd01f7a483ba2862f52426e42793a090328"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></p>
-<hr>
+<h3 id="The-slides-are-available-at-https://tinyurl.com/MPCPresentationCryptography.">The slides are available at <a href="https://tinyurl.com/MPCPresentationCryptography">https://tinyurl.com/MPCPresentationCryptography</a>.<a class="anchor-link" href="#The-slides-are-available-at-https://tinyurl.com/MPCPresentationCryptography.">&#182;</a></h3><h2><a href="https://mybinder.org/v2/gh/0Art0/SecureMultipartyComputation/08dd5dd01f7a483ba2862f52426e42793a090328"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></h2>
 
 </div>
 </div>
